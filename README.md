@@ -10,13 +10,13 @@ Swift 3.0+ on either macOS or Linux.
 To use this in your app, either copy the single source file to your app's directory, drag the Xcode project to your Xcode sidebar or add the following to your Package.swift file:
 
 ```swift
-    .Package(url: "https://github.com/Skyus/Defile.git", majorVersion: 2, minor: 0)
+    .Package(url: "https://github.com/Skyus/Defile.git", majorVersion: 3, minor: 0)
 ```
 
 If you want to use it in a single source file, you may want to look into [quips](https://github.com/skyus/quips), where you can import Defile like this:
 
 ```swift
-    @quip Defile:"https://github.com/Skyus/Defile.git":2:0
+    @quipgh Defile:skyus/Defile:3
 ```
 
 # License
