@@ -93,6 +93,14 @@ public class Defile
         }
     }
 
+    deinit
+    {
+        close()
+    }
+
+    /*
+        Closes the file. This is usually necessary to write to disk.
+    */
     public func close()
     {
         if cOpen
@@ -102,9 +110,27 @@ public class Defile
         }
     }
 
-    deinit
+    /*
+        An alternative to the initializer.
+    */
+    static public func open(_ path: String, mode: DefileModes = .read) -> Defile?
     {
-        close()
+        return Defile(path, mode: mode)
+    }
+
+    /*
+        Ruby-inspired, this version of open just takes a closure. The file will automatically close upon completion of the closure. The closure should return a non-nil value for error handling.
+    */
+    static public func open(_ path: String, mode: DefileModes = .read, execute: (Defile) -> (Any?)) -> Any?
+    {
+        guard let file = Defile(path, mode: mode)
+        else
+        {
+            return nil
+        }
+        let result = execute(file)
+        file.close()
+        return result
     }
     
     /*
@@ -206,16 +232,27 @@ public class Defile
         }      
     }
 
+    @available(*, unavailable, message: "Please use .print() instead.")
+    public func puts(string: String) throws {}
+
     /*
-        Writes string to file, adding newline.
+        Essentially an equivalent of Swift.print() for use with Defile, except this one throws.
 
         Fails for the same reasons as write, which it uses.
     */
-    public func puts(string: String) throws
+    public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") throws
     {
         do
         {
-            try self.write(string: string + "\n")
+            for (i, item) in items.enumerated()
+            {
+                try self.write(string: String(describing: item))
+                if (i != items.count - 1)
+                {
+                    try self.write(string: separator)
+                }               
+            }
+            try self.write(string: terminator)
         }
         catch
         {
