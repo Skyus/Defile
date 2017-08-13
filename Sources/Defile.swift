@@ -66,7 +66,7 @@ public class Defile
                 modeStr = "a"
         }
         
-        guard let file = fopen(path, modeStr)
+        guard let file = fopen(path, modeStr + "b")
         else
         {
             return nil
