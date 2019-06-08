@@ -1,7 +1,15 @@
-// swift-tools-version:3.1
+// swift-tools-version:5.0
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "Defile"
+    name: "Defile",
+    dependencies: [
+    ],
+    targets: [
+        .target(
+            name: "Defile",
+            dependencies: [])
+    ]
 )
