@@ -106,12 +106,12 @@ public class File {
     /*
         Ruby-inspired, this version of open just takes a closure. The file will automatically close upon completion of the closure.
     */
-    static public func open(_ path: String, mode: FileModes = .read, execute: (File) -> ()) {
+    static public func open(_ path: String, mode: FileModes = .read, execute: (File) throws -> ()) throws {
         guard let file = File(path, mode: mode)
         else {
             return
         }
-        execute(file)
+        try execute(file)
         file.close()
     }
 
