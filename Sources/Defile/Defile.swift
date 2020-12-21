@@ -112,7 +112,7 @@ public class File {
             return
         }
         try execute(file)
-        file.close()
+        // closed with deinit
     }
 
     /*
@@ -126,6 +126,23 @@ public class File {
         return file.string
     }
 
+    /*
+        Checks if file exists
+    */
+    static public func exists(_ path: String) -> Bool {
+        return access(path, F_OK) == 0
+    }
+
+    /*
+        Try to delete file
+    */
+    static public func delete(_ path: String) throws {
+        if remove(path) != 0 {
+            throw FileError.writeFailure
+        }
+    }
+    
+    
     /*
         Just dumps file into a byte array.
     */
