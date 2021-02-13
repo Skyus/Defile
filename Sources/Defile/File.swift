@@ -1,5 +1,4 @@
 /*
-    Defile.swift
     A C-file wrapper for Swift because Foundation's API proved too difficult for me to use.
 */
 import Foundation
@@ -175,7 +174,7 @@ public class File {
     /*
         Returns files as lines. Pretty popular for text processing.
 
-        Fails for the same reasons property "string" would fail.
+        Fails for the same reasons the property "string" would fail.
     */
 
     public var lines: [String]? {

@@ -21,5 +21,9 @@ let package = Package(
         .target(
             name: "Defile",
             dependencies: []),
+        .testTarget(
+            name: "DefileTests",
+            dependencies: ["Defile"]
+        )
     ]
 )
