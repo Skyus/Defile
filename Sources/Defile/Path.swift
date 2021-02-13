@@ -15,17 +15,14 @@ public enum Path {
         Aims to match shell dirname
     */
     public static func dirname(_ path: String) -> String {
-        let p = UnsafeMutablePointer<Int8>(mutating: (path as NSString).utf8String)
-        return String(cString: Foundation.dirname(p))
+        return String((path as NSString).deletingLastPathComponent)
     }
 
     /*
         Aims to match shell basename
     */
     public static func basename(_ path: String, extension: String? = nil) -> String {
-        let p = UnsafeMutablePointer<Int8>(mutating: (path as NSString).utf8String)
-        let string: String = String(cString: Foundation.basename(p))
-
+        let string: String = (path as NSString).lastPathComponent 
         
         if let ext = `extension` {
             let stringMinusExtension = String(string.prefix(string.count - ext.count))
